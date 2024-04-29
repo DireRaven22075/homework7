@@ -25,20 +25,15 @@ typedef struct Head {
 /* 함수 리스트 */
 headNode* initialize(headNode* h);
 int freeList(headNode* h);
-
 int insertFirst(headNode* h, int key);
 int insertNode(headNode* h, int key);
 int insertLast(headNode* h, int key);
-
 int deleteFirst(headNode* h);
 int deleteNode(headNode* h, int key);
 int deleteLast(headNode* h);
 int invertList(headNode* h);
-
 void printList(headNode* h);
-
-int main()
-{
+int main() {
 	char command;
 	int key;
 	headNode* headnode=NULL;
@@ -298,7 +293,30 @@ int deleteLast(headNode* h) {
  * 리스트의 링크를 역순으로 재 배치
  */
 int invertList(headNode* h) {
-	
+	//만약 리스트가 비어있는 경우
+	if (h->first == NULL) {
+		//함수 비정상 종료
+		return 1;
+	}
+	//이전 노드를 저장할 변수 (초기값은 NULL)
+	listNode* prev = NULL;
+	//임시 변수에 첫번째 노드를 저장
+	listNode* temp = h->first;
+	//다음 노드를 저장할 변수 (초기값은 NULL)
+	listNode* next = NULL;
+	//리스트의 끝까지 반복
+	while (temp != NULL) {
+		//다음 노드에 현재 노드의 링크를 저장
+		next = temp->link;
+		//현재 노드의 링크를 이전 노드로 변경
+		temp->link = prev;
+		//이전 노드에 현재 노드를 저장
+		prev = temp;
+		//다음 노드로 이동
+		temp = next;
+	}
+	h->first = prev;
+	//함수 종료
 	return 0;
 }
 
