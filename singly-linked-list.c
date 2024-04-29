@@ -156,7 +156,8 @@ int insertNode(headNode* h, int key) {
 	listNode* new = (listNode*)malloc(sizeof(listNode));
 	new->key = key;
 	new->link = NULL;
-	//만약 삽입할 노드가 첫번째 노드일 경우 (리스트가 비어있음 또는 첫번째 노드의 key보다 작은 경우)
+	//만약 삽입할 노드가 첫번째 노드일 경우
+	//(리스트가 비어있음 또는 첫번째 노드의 key보다 작은 경우)
 	if (h->first == NULL || key < h->first->key) {
 		//삽입할 노드의 링크를 기존 첫번째 노드로 설정
 		new->link = h->first;
@@ -169,7 +170,7 @@ int insertNode(headNode* h, int key) {
 	listNode* temp = h->first;
 	//이전 노드를 저장할 변수 (초기값은 NULL)
 	listNode* prev = NULL;
-	//리스트의 끝까지 반복
+	//리스트의 끝까지 또는 조건에 맞을 때까지 반복
 	while (temp != NULL && key >= temp->key) {
 		//이전 노드에 현재 노드를 저장
 		prev = temp;
