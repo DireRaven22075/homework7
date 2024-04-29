@@ -153,7 +153,34 @@ int insertFirst(headNode* h, int key) {
 
 /* 리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 */
 int insertNode(headNode* h, int key) {
-
+	listNode* new = (listNode*)malloc(sizeof(listNode));
+	new->key = key;
+	new->link = NULL;
+	//만약 삽입할 노드가 첫번째 노드일 경우 (리스트가 비어있음 또는 첫번째 노드의 key보다 작은 경우)
+	if (h->first == NULL || key < h->first->key) {
+		//삽입할 노드의 링크를 기존 첫번째 노드로 설정
+		new->link = h->first;
+		//list의 첫번째 노드를 삽입할 노드로 설정
+		h->first = new;
+		//함수 종료
+		return 0;
+	}
+	//임시 변수에 리스트의 첫 번째 노드를 저장
+	listNode* temp = h->first;
+	//이전 노드를 저장할 변수 (초기값은 NULL)
+	listNode* prev = NULL;
+	//리스트의 끝까지 반복
+	while (temp != NULL && key >= temp->key) {
+		//이전 노드에 현재 노드를 저장
+		prev = temp;
+		//현재 노드를 다음 노드로 변경
+		temp = temp->link;
+	}
+	//새로운 노드 위치에 기존 노드랑 연결
+	new->link = temp;
+	//이전 노드 위치에 새로운 노드 연결
+	prev->link = new;
+	//함수 종료
 	return 0;
 }
 
@@ -226,7 +253,20 @@ int deleteNode(headNode* h, int key) {
  * list의 마지막 노드 삭제
  */
 int deleteLast(headNode* h) {
-
+	//임시 변수에 첫번째 노드를 저장
+	listNode* temp = h->first;
+	//만약 첫번째 노드가 없는 경우
+	if (temp == NULL) {
+		//함수 비정상 종료
+		return 1;
+	}
+	//다음 노드가 존재하지 않을 때까지 반복
+	while (temp->link != NULL) {
+		temp = temp->link;
+	}
+	//임시 변수에 저장된 마지막 노드를 메모리 해제
+	free(temp);
+	//함수 종료
 	return 0;
 }
 
@@ -235,7 +275,7 @@ int deleteLast(headNode* h) {
  * 리스트의 링크를 역순으로 재 배치
  */
 int invertList(headNode* h) {
-
+	
 	return 0;
 }
 
