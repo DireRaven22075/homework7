@@ -170,8 +170,13 @@ int insertLast(headNode* h, int key) {
  * list의 첫번째 노드 삭제
  */
 int deleteFirst(headNode* h) {
-
-
+	//임시 변수에 첫번째 노드를 저장
+	listNode* temp = h->first;
+	//첫번째 노드를 두번째 노드로 변경
+	h->first = temp->link;
+	//임시 변수에 저장된 (전) 첫번째 노드를 메모리 해제
+	free(temp);
+	//함수 종료
 	return 0;
 }
 
