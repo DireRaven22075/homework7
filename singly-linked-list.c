@@ -42,7 +42,7 @@ int main()
 	char command;
 	int key;
 	headNode* headnode=NULL;
-
+	printf("[===========2023041004==========한윤수]\n");
 	do{
 		printf("----------------------------------------------------------------\n");
 		printf("                     Singly Linked List                         \n");
