@@ -290,6 +290,7 @@ int deleteLast(headNode* h) {
 	free(temp);
 	//함수 종료
 	return 0;
+	//return 1;
 }
 
 
