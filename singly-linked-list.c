@@ -153,6 +153,7 @@ int insertFirst(headNode* h, int key) {
 
 /* 리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 */
 int insertNode(headNode* h, int key) {
+	//새로운 노드 생성
 	listNode* new = (listNode*)malloc(sizeof(listNode));
 	new->key = key;
 	new->link = NULL;
@@ -189,7 +190,27 @@ int insertNode(headNode* h, int key) {
  * list에 key에 대한 노드하나를 추가
  */
 int insertLast(headNode* h, int key) {
-
+	//새로운 노드 생성
+	listNode* new = (listNode*)malloc(sizeof(listNode));
+	new->key = key;
+	new->link = NULL;
+	//만약 리스트가 비어있는 경우
+	if (h->first == NULL) {
+		//리스트 첫번째 노드로 새로운 노드 삽입
+		h->first = new;
+		//함수 종료
+		return 0;
+	}
+	//임시 변수에 리스트의 첫번째 노드를 저장
+	listNode* temp = h->first;
+	//리스트의 끝까지 반복
+	while (temp->link != NULL) {
+		//다음 노드로 이동
+		temp = temp->link;
+	}
+	//마지막 노드의 링크에 새로운 노드 연결
+	temp->link = new;
+	//함수 종료
 	return 0;
 }
 
