@@ -185,9 +185,41 @@ int deleteFirst(headNode* h) {
  * list에서 key에 대한 노드 삭제
  */
 int deleteNode(headNode* h, int key) {
-
+	//임시 변수에 첫번째 노드를 저장
+	listNode* temp = h->first;
+	//이전 변수에 이전 노드를 저장 (초기값은 NULL)
+	listNode* prev = NULL;
+	//첫번째 노드가 삭제할 노드인 경우
+	if(temp->key == key) {
+		//첫번째 노드를 두번째 노드로 변경
+		h->first = temp->link;
+		//첫번째 노드를 메모리 해제
+		free(temp);
+		//함수 종료
+		return 0;
+	}
+	else {
+		//첫번째 노드가 삭제할 노드가 아닌 경우
+		//첫번째 노드가 삭제할 노드가 나올 때까지 반복
+		while(temp != NULL && temp->key != key) {
+			//이전 노드에 현재 노드를 저장
+			prev = temp;
+			//현재 노드를 다음 노드로 변경
+			temp = temp->link;
+		}
+		//삭제할 노드가 없는 경우
+		if(temp == NULL) {
+			//함수 비정상 종료
+			return 1;
+		}
+		//삭제할 노드가 있는 경우
+		//이전 노드의 링크를 삭제할 노드의 링크로 변경
+		prev->link = temp->link;
+		//삭제할 노드를 메모리 해제
+		free(temp);
+	}
+	//함수 종료
 	return 0;
-
 }
 
 /**
